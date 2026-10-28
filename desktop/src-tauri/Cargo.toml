@@ -1,0 +1,65 @@
+[package]
+name = "saladict-desktop"
+version = "0.1.0"
+description = "沙拉划词 · 轻量桌面查词工具"
+edition = "2021"
+rust-version = "1.77"
+
+[lib]
+name = "saladict_lib"
+crate-type = ["rlib"]
+
+[[bin]]
+name = "saladict-desktop"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri-plugin-single-instance = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# lzo: 少部分 v1 词典用 LZO 压缩，开这个小特性换取更好的兼容性
+mdictlib = { version = "0.2", features = ["lzo"] }
+base64 = "0.22"
+reqwest = { version = "0.12", default-features = false, features = [
+  "gzip",
+  "deflate",
+  "brotli",
+  "charset",
+  "cookies",
+  "native-tls",
+] }
+log = { version = "0.4", features = ["std"] }
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.62", features = [
+  "Win32_Foundation",
+  "Win32_Graphics_Gdi",
+  "Win32_System_Com",
+  "Win32_System_DataExchange",
+  "Win32_System_LibraryLoader",
+  "Win32_System_Memory",
+  "Win32_System_Registry",
+  "Win32_System_Threading",
+  "Win32_UI_Accessibility",
+  "Win32_UI_Controls_Dialogs",
+  "Win32_UI_Input_KeyboardAndMouse",
+  "Win32_UI_Shell",
+  "Win32_UI_WindowsAndMessaging",
+] }
+
+[features]
+default = []
+# 打开后可在 release 包内使用 F12 开发者工具
+devtools = ["tauri/devtools"]
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+incremental = false

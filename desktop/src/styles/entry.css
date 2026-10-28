@@ -1,0 +1,119 @@
+/* mdx 词条自身的 HTML 排版约束：允许词典自带样式，但统一限制宽度、
+   字号下限与外链样式，避免个别词典把浮窗撑破。 */
+.entry {
+  font-family: var(--font-dict);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text);
+  word-break: break-word;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 320px;
+}
+
+.entry * {
+  max-width: 100%;
+}
+
+.entry img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+}
+
+.entry h1,
+.entry h2,
+.entry h3,
+.entry h4 {
+  margin: 14px 0 6px;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.entry h1 {
+  font-size: 18px;
+}
+
+.entry p {
+  margin: 8px 0;
+}
+
+.entry ul,
+.entry ol {
+  margin: 6px 0;
+  padding-left: 20px;
+}
+
+.entry li {
+  margin: 2px 0;
+}
+
+.entry a {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.16s var(--ease), color 0.16s var(--ease);
+  cursor: pointer;
+}
+
+.entry a:hover {
+  border-bottom-color: currentColor;
+}
+
+.entry [data-entry] {
+  font-weight: 500;
+}
+
+.entry [data-sound] {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px;
+  border-radius: 5px;
+  background: var(--primary-soft);
+  font-size: 12px;
+}
+
+.entry table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+.entry th,
+.entry td {
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--line-soft);
+  text-align: left;
+  vertical-align: top;
+}
+
+.entry blockquote {
+  margin: 10px 0;
+  padding: 6px 12px;
+  border-left: 3px solid var(--primary-soft);
+  color: var(--text-2);
+}
+
+.entry hr {
+  border: none;
+  border-top: 1px solid var(--line-soft);
+  margin: 12px 0;
+}
+
+.entry font[color='#000080'],
+.entry .grey,
+.entry .gray {
+  color: var(--text-2);
+}
+
+/* 很多词典用固定宽度/绝对定位排版，这里统一兜底 */
+.entry [style*='position: absolute'] {
+  position: static !important;
+}
+
+.entry [style*='width: 800'],
+.entry [style*='width:800'] {
+  width: auto !important;
+}

@@ -1,0 +1,27 @@
+{
+  "name": "saladict-desktop",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "沙拉划词 · 轻量桌面查词工具（Tauri 2 + 本地 MDX + 在线词典）",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "app:dev": "tauri dev",
+    "app:build": "tauri build --no-bundle",
+    "icons": "python scripts/gen-icons.py"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.9.0",
+    "dompurify": "^3.2.7",
+    "preact": "^10.27.2"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.2",
+    "@tauri-apps/cli": "^2.9.0",
+    "typescript": "^5.7.3",
+    "vite": "^5.4.11"
+  }
+}
